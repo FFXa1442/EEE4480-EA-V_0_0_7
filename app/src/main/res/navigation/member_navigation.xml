@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/member_navigation"
+    app:startDestination="@id/dummyFragment">
+
+    <fragment
+        android:id="@+id/nav_change_user_name"
+        android:name="com.sample.application.ea.functions.membersystem.ui.ChangeUserNameFragment"
+        android:label="Change User Name"
+        tools:layout="@layout/fragment_change_user_name" />
+
+    <action
+        android:id="@+id/action_global_nav_change_user_name"
+        app:destination="@id/nav_change_user_name"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/member_navigation"
+        app:popUpToSaveState="false" />
+
+    <fragment
+        android:id="@+id/nav_change_user_password"
+        android:name="com.sample.application.ea.functions.membersystem.ui.ChangeUserPasswordFragment"
+        android:label="Change User Password"
+        tools:layout="@layout/fragment_change_user_password" />
+
+    <action
+        android:id="@+id/action_global_nav_change_user_password"
+        app:destination="@id/nav_change_user_password"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/member_navigation"
+        app:popUpToSaveState="false" />
+
+    <fragment
+        android:id="@+id/dummyFragment"
+        android:name="com.sample.application.ea.ui.generic.DummyFragment"
+        android:label="fragment_dummy"
+        tools:layout="@layout/fragment_dummy" />
+
+
+</navigation>

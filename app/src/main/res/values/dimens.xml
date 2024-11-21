@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="block_title_text_size">32dp</dimen>
+    <dimen name="block_edit_text_size">20sp</dimen>
+    <dimen name="block_button_text_size">12sp</dimen>
+    <dimen name="block_buttons_margin_top">30dp</dimen>
+</resources>

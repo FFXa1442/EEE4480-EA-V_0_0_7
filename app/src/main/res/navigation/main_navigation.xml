@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.sample.application.ea.ui.main.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_2" />
+
+    <fragment
+        android:id="@+id/nav_category"
+        android:name="com.sample.application.ea.ui.main.category.CategoryFragment"
+        android:label="Category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/nav_schedule_view"
+        android:name="com.sample.application.ea.ui.main.schedule.view.ScheduleViewFragment"
+        android:label="Schedule View"
+        tools:layout="@layout/fragment_schedule_view">
+        <action
+            android:id="@+id/action_nav_schedule_view_to_nav_schedule_editor"
+            app:destination="@id/nav_schedule_editor" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_schedule_editor"
+        android:name="com.sample.application.ea.ui.main.schedule.editor.ScheduleEditorFragment"
+        android:label="Schedule Editor"
+        tools:layout="@layout/fragment_schedule_editor" />
+</navigation>

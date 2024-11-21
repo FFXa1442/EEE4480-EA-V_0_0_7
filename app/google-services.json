@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "298219655454",
+    "firebase_url": "https://nw-mbl-app-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nw-mbl-app-db",
+    "storage_bucket": "nw-mbl-app-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298219655454:android:151b1e9700f949764df90f",
+        "android_client_info": {
+          "package_name": "com.ea.project.g09"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6RKDMcdYwSxX_hUy_okPC0XeRP8se3d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298219655454:android:02c5c067cd78051a4df90f",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6RKDMcdYwSxX_hUy_okPC0XeRP8se3d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298219655454:android:aa09205d298a58de4df90f",
+        "android_client_info": {
+          "package_name": "com.sample.application.ea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6RKDMcdYwSxX_hUy_okPC0XeRP8se3d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

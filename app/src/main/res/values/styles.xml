@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearanceOverlay.ImageView.ItineraryItem.CornerRadius" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">5dp</item>
+    </style>
+
+    <style name="ThemeOverlay.CustomNavBar" parent="">
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.ImageView.StartScreen.CornerSize" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">100dp</item>
+        <item name="cornerSizeBottomRight">200dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/white" />
+            <stroke
+                android:width="0px"
+                android:color="@color/gray_400" />
+        </shape>
+    </item>
+    <item>
+        <inset
+            android:drawable="@drawable/baseline_arrow_back_ios_new_24"
+            android:insetLeft="10px"
+            android:insetTop="10px"
+            android:insetRight="10px"
+            android:insetBottom="10px" />
+    </item>
+
+</layer-list>

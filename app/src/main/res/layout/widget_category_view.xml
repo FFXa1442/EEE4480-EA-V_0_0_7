@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cyan_700"
+            android:orientation="vertical">
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/all_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ALL" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/jp_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_japan"
+                android:text="JP" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/kr_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_south_korea"
+                android:text="KR" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/tw_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_the_republic_of_china"
+                android:text="TW" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/uk_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_the_united_kingdom"
+                android:text="UK" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/us_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_the_united_states"
+                android:text="US" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/cn_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_the_peoples_republic_of_china"
+                android:text="CN" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/my_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_malaysia"
+                android:text="MY" />
+
+            <com.sample.application.ea.widget.CategoryViewButton
+                android:id="@+id/sg_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flag_of_singapore"
+                android:text="SG" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</layout>

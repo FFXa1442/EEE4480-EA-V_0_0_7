@@ -1,0 +1,78 @@
+[versions]
+agp = "8.6.1"
+androidImageCropper = "4.6.0"
+compose = "2.6.0"
+constraintlayoutCompose = "1.1.0"
+core = "12.1.1"
+glide = "4.16.0"
+imagecropview = "3.0.1"
+imageslideshow = "0.1.2"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
+firebaseDatabase = "21.0.0"
+firebaseAuth = "23.1.0"
+coreSplashscreen = "1.1.0-rc01"
+navigationUi = "2.8.4"
+navigationFragment = "2.8.4"
+navigationRuntime = "2.8.4"
+googleGmsGoogleServices = "4.4.2"
+view = "2.6.0"
+firebaseStorage = "21.0.1"
+legacySupportV4 = "1.0.0"
+lifecycleLivedataKtx = "2.8.7"
+lifecycleViewmodelKtx = "2.8.7"
+kotlin = "2.0.21"
+coreKtx = "1.15.0"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.10.01"
+
+[libraries]
+android-image-cropper = { module = "com.vanniktech:android-image-cropper", version.ref = "androidImageCropper" }
+#constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+imagecropview = { module = "io.github.rroohit:ImageCropView", version.ref = "imagecropview" }
+imageslideshow = { module = "com.github.denzcoskun:ImageSlideshow", version.ref = "imageslideshow" }
+pierfrancescosoffritti-androidyoutubeplayer-core = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "core" }
+#kizitonwose-calendar-compose = { module = "com.kizitonwose.calendar:compose", version.ref = "compose" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
+navigation-runtime = { group = "androidx.navigation", name = "navigation-runtime", version.ref = "navigationRuntime" }
+#kizitonwose-calendar-view = { module = "com.kizitonwose.calendar:view", version.ref = "view" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+#activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+#compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+#ui = { group = "androidx.compose.ui", name = "ui" }
+#ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+#ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+#ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+#ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+#ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+#material3 = { group = "androidx.compose.material3", name = "material3" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+#compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+

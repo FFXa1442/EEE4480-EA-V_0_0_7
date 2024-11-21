@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Basic"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".functions.imagecropper.ImageCropper"
+            android:exported="false"
+            android:label="@string/title_activity_image_cropper"
+            android:theme="@style/Theme.Basic" />
+        <activity
+            android:name=".functions.membersystem.activity.MemberActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Auth" />
+        <activity
+            android:name=".activity.youtube.web.YoutubeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false" />
+        <activity
+            android:name=".activity.loading.DataLoadingActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".activity.guest.GuestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Auth" />
+        <activity
+            android:name=".activity.main.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Homepage" />
+        <activity
+            android:name=".activity.splash.screen.SplashScreenActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:theme="@style/Theme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
