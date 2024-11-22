@@ -29,15 +29,9 @@ internal abstract class ScheduleListAdapter(private val context: Context) :
         }
     }
 
-    var onRemoveButtonClick = object : OnRemoveButtonClick {
-        override fun onClick(item: ScheduleSet) {
-        }
-    }
+    var onRemoveButtonClick: (ScheduleSet) -> Unit = {}
 
-    var onItemClick = object : OnItemClick {
-        override fun onClick(item: ScheduleSet) {
-        }
-    }
+    var onItemClick : (ScheduleSet) -> Unit = {}
 
     protected lateinit var filterList: List<ScheduleSet>
 
@@ -67,11 +61,11 @@ internal abstract class ScheduleListAdapter(private val context: Context) :
         val set = filterList[position]
 
         holder.removeButton.setOnClickListener {
-            onRemoveButtonClick.onClick(set)
+            onRemoveButtonClick(set)
         }
 
         holder.item.setOnClickListener {
-            onItemClick.onClick(set)
+            onItemClick(set)
         }
 
         holder.timeTextView.text = String.format("Time: %s", set.calender().to24HourTime())

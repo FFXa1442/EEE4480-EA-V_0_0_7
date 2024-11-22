@@ -5,11 +5,14 @@ import com.sample.application.ea.R
 import com.sample.application.ea.databinding.FragmentSignUpBinding
 import com.sample.application.ea.functions.EmailValidation
 import com.sample.application.ea.functions.PasswordValidation
+import com.sample.application.ea.functions.membersystem.constant.MemberSystem.PASSWORD_INVALID_MESSAGE
+import com.sample.application.ea.text.doOnTextChanged
 import com.sample.application.ea.ui.guest.generic.GuestBindingFragment
-import java.util.Objects
 
 class SignUpFragment : GuestBindingFragment<FragmentSignUpBinding>() {
+
     override val layoutId: Int = R.layout.fragment_sign_up
+
     private val checker: Checker by lazy {
         Checker()
     }
@@ -25,7 +28,7 @@ class SignUpFragment : GuestBindingFragment<FragmentSignUpBinding>() {
         savedInstanceState: Bundle?,
     ) {
         binding.registerButton.apply {
-            setEnabled(false)
+            isEnabled = false
             setOnClickListener {
                 val name = binding.userNameEditText.text.toString().trim()
                 when {
@@ -36,7 +39,6 @@ class SignUpFragment : GuestBindingFragment<FragmentSignUpBinding>() {
 
                     else -> {
                         val email = binding.userEmailEditText.text.toString()
-
                         val password = binding.userPasswordEditText.text.toString()
 
                         val emailIsValid = EmailValidation.patternMatches(email)
@@ -69,7 +71,43 @@ class SignUpFragment : GuestBindingFragment<FragmentSignUpBinding>() {
                         }
                     }
                 }
+            }
+        }
 
+        binding.backButton.setOnClickListener {
+            navigateUp()
+        }
+
+        binding.userNameEditText.doOnTextChanged { s ->
+            binding.userNameTextLayout.error = null
+            checker.updateNameState(s!!.isNotEmpty())
+        }
+
+        binding.userEmailEditText.doOnTextChanged { s ->
+            when {
+                EmailValidation.patternMatches(s.toString()) -> {
+                    checker.updateEmailState(true)
+                    binding.userEmailTextLayout.error = null
+                }
+
+                else -> {
+                    checker.updateEmailState(false)
+                    binding.userEmailTextLayout.error = "Invalid email address"
+                }
+            }
+        }
+
+        binding.userPasswordEditText.doOnTextChanged { s ->
+            when {
+                s!!.isEmpty() || PasswordValidation.patternMatches(s.toString()) -> {
+                    checker.updatePasswordState(true)
+                    binding.userPasswordTextLayout.error = null
+                }
+
+                else -> {
+                    checker.updatePasswordState(false)
+                    binding.userPasswordTextLayout.error = PASSWORD_INVALID_MESSAGE
+                }
             }
         }
 
@@ -96,9 +134,8 @@ class SignUpFragment : GuestBindingFragment<FragmentSignUpBinding>() {
         }
 
         private fun update() {
-            binding.registerButton.setEnabled(
+            binding.registerButton.isEnabled =
                 nameIsValid && emailIsValid && passwordIsValid
-            )
         }
     }
 }

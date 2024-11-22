@@ -1,0 +1,54 @@
+package com.sample.application.ea.ui.main.generic
+
+import android.os.Bundle
+import android.widget.EditText
+import androidx.annotation.CallSuper
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.sample.application.ea.activity.main.MainActivity
+import com.sample.application.ea.dataset.readonly.Itinerary
+import com.sample.application.ea.ui.main.description.DescriptionFragment
+import com.sample.application.ea.widget.ItineraryListAdapter
+import java.util.regex.Pattern
+
+abstract class ItineraryListViewFragment<TBinding> :
+    MainBindingFragment<TBinding> where TBinding : ViewDataBinding {
+
+    internal val mainActivity: MainActivity
+        get() = parentActivity
+
+    internal abstract val searchView: EditText
+
+    internal abstract val recyclerView: RecyclerView
+
+    internal var adapter: ItineraryListAdapter? = null
+
+    internal var sheet: DescriptionFragment? = null
+
+    constructor() : super()
+    constructor(contentLayoutId: Int) : super(contentLayoutId)
+
+    protected fun filter(constraint: CharSequence) =
+        adapter!!.filter.filter(constraint)
+
+    @CallSuper
+    override fun onCreateView(binding: TBinding, savedInstanceState: Bundle?) {
+        setupUI(binding.root)
+        setupSideViewButton(binding)
+        setupRecyclerView()
+    }
+
+    protected open fun setupSideViewButton(
+        binding: TBinding,
+    ) = Unit
+
+    internal open fun filterByPopularity(item: Itinerary) = true
+
+    internal abstract fun matchFilter(
+        pattern: Pattern,
+        set: Itinerary,
+    ): List<Boolean>
+
+    internal abstract fun onSearchTextChanged(s: CharSequence?)
+
+}

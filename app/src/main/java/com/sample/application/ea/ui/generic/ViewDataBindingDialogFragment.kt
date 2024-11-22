@@ -30,11 +30,9 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
     BottomSheetDialogFragment where TBinding : ViewDataBinding,
                                     TParentActivity : AppCompatActivity {
 
-    protected var binding: TBinding? = null
-        private set
+    protected lateinit var binding: TBinding
 
-    protected var parentActivity: TParentActivity? = null
-        private set
+    protected lateinit var parentActivity: TParentActivity
 
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -43,11 +41,6 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
 
     constructor(contentLayoutId: Int) : super(contentLayoutId)
 
-    fun requireBinding(): TBinding = binding!!
-
-    fun requireParentActivity(): TParentActivity = parentActivity!!
-
-    // Called when the fragment is attached to a context.
     @Suppress("UNCHECKED_CAST")
     @CallSuper
     override fun onAttach(
@@ -78,18 +71,6 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
         )
     }.root
 
-    @Deprecated("No use")
-    protected open fun onApplyWindowInsets(
-        binding: TBinding,
-        sysStatusBarHeight: Int,
-        sysNavBarHeight: Int,
-    ) {
-        Log.d(
-            this::class.java.name,
-            "sysStatusBarHeight: $sysStatusBarHeight, sysNavBarHeight: $sysNavBarHeight"
-        )
-    }
-
     protected open fun onApplyWindowInsets(
         view: View,
         binding: TBinding,
@@ -105,7 +86,7 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
         view: View,
         savedInstanceState: Bundle?,
     ) {
-        onViewCreated(binding!!, savedInstanceState)
+        onViewCreated(binding, savedInstanceState)
     }
 
     protected open fun onViewCreated(
@@ -113,7 +94,7 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
         savedInstanceState: Bundle?,
     ) = Unit
 
-    protected open fun enableFullScreen() = false
+    protected open val enableFullScreen = false
 
     @SuppressLint("RestrictedApi")
     @CallSuper
@@ -126,7 +107,7 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
 
                         this@ViewDataBindingDialogFragment.onApplyWindowInsets(
                             v,
-                            binding!!,
+                            binding,
                             insets.getInsets(
                                 WindowInsetsCompat.Type.systemBars()
                             )
@@ -136,7 +117,7 @@ abstract class ViewDataBindingDialogFragment<TBinding, TParentActivity> :
                 }
 
 
-                if (enableFullScreen()) {
+                if (enableFullScreen) {
                     window!!.apply {
                         setFlags(
                             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,

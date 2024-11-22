@@ -120,9 +120,7 @@ class SignInFragment : GuestBindingFragment<FragmentSignInBinding>() {
         }
 
         private fun update() {
-            binding.signInButton.setEnabled(
-                emailIsValid && passwordIsValid
-            )
+            binding.signInButton.isEnabled = emailIsValid && passwordIsValid
         }
     }
 }

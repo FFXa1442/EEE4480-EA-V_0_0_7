@@ -7,10 +7,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sample.application.ea.R
 import com.sample.application.ea.activity.generics.NavigationActivity
+import com.sample.application.ea.database.FirebaseControl
 import com.sample.application.ea.databinding.ActivityMainBinding
 
 class MainActivity :
-    NavigationActivity<ActivityMainBinding>() {
+    NavigationActivity<ActivityMainBinding>(),
+    FirebaseControl {
 
     override val layoutId: Int =
         R.layout.activity_main

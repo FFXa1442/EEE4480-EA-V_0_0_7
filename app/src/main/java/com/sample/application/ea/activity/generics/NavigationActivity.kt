@@ -21,8 +21,7 @@ import com.sample.application.ea.widget.state.ToolbarState
 abstract class NavigationActivity<TBinding> :
     ViewDataBindingActivity<TBinding>,
     ToolbarState,
-    BottomNavViewState
-        where TBinding : ViewDataBinding {
+    BottomNavViewState where TBinding : ViewDataBinding {
 
     constructor() : super()
 
@@ -44,7 +43,7 @@ abstract class NavigationActivity<TBinding> :
 
     fun navigate(
         @IdRes id: Int,
-        args: Bundle? = null
+        args: Bundle? = null,
     ) = navController.navigate(id, args)
 
     fun navigateUp() = tryNonNullElse(
@@ -92,7 +91,7 @@ abstract class NavigationActivity<TBinding> :
     }
 
     protected open fun setTemplateBottomMargin(
-        value: Int
+        value: Int,
     ) = Unit
 
     override fun showNavView() = tryNonNull(

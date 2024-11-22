@@ -89,39 +89,39 @@ class CategoryView : NavigationRailView {
 
     // Setters for button click listeners
 
-    fun setOnAllButtonClickListener(l: OnClickListener?) {
+    fun setOnAllButtonClickListener(l: OnClickListener) {
         allButton.setOnClickListener(l)
     }
 
-    fun setOnJPButtonClickListener(l: OnClickListener?) {
+    fun setOnJPButtonClickListener(l: OnClickListener) {
         jpButton.setOnClickListener(l)
     }
 
-    fun setOnKRButtonClickListener(l: OnClickListener?) {
+    fun setOnKRButtonClickListener(l: OnClickListener) {
         krButton.setOnClickListener(l)
     }
 
-    fun setOnTWButtonClickListener(l: OnClickListener?) {
+    fun setOnTWButtonClickListener(l: OnClickListener) {
         twButton.setOnClickListener(l)
     }
 
-    fun setOnUKButtonClickListener(l: OnClickListener?) {
+    fun setOnUKButtonClickListener(l: OnClickListener) {
         ukButton.setOnClickListener(l)
     }
 
-    fun setOnUSButtonClickListener(l: OnClickListener?) {
+    fun setOnUSButtonClickListener(l: OnClickListener) {
         usButton.setOnClickListener(l)
     }
 
-    fun setOnCNButtonClickListener(l: OnClickListener?) {
+    fun setOnCNButtonClickListener(l: OnClickListener) {
         cnButton.setOnClickListener(l)
     }
 
-    fun setOnMYButtonClickListener(l: OnClickListener?) {
+    fun setOnMYButtonClickListener(l: OnClickListener) {
         myButton.setOnClickListener(l)
     }
 
-    fun setOnSGButtonClickListener(l: OnClickListener?) {
+    fun setOnSGButtonClickListener(l: OnClickListener) {
         sgButton.setOnClickListener(l)
     }
 }
