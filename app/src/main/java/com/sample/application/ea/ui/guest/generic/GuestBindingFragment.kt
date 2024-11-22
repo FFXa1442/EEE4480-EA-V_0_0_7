@@ -23,7 +23,7 @@ abstract class GuestBindingFragment<TBinding> :
     protected val firebaseAuth: FirebaseAuth
         get() = parentActivity.firebaseAuth
 
-    protected fun navigateUp() =
+    fun navigateUp() =
         parentActivity.navigateUp()
 
     protected fun navigate(

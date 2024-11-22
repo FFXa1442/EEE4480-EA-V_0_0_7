@@ -16,7 +16,9 @@ class SignInFragment : GuestBindingFragment<FragmentSignInBinding>() {
 
     override val layoutId: Int = R.layout.fragment_sign_in
 
-    private val checker = Checker()
+    private val checker: Checker by lazy {
+        Checker()
+    }
 
     override fun onCreateView(binding: FragmentSignInBinding, savedInstanceState: Bundle?) {
 
