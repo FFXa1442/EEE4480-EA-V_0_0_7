@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import com.sample.application.ea.R;
 import com.sample.application.ea.databinding.FragmentStartBinding;
-import com.sample.application.ea.ui.guest.generic.GuestBindingFragment;
 
 /**
  * Final class representing the Start Fragment.

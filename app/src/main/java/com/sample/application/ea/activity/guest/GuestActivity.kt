@@ -6,10 +6,12 @@ import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.core.graphics.Insets
 import com.sample.application.ea.R
 import com.sample.application.ea.activity.generics.NavigationActivity
+import com.sample.application.ea.database.FirebaseControl
 import com.sample.application.ea.databinding.ActivityGuestBinding
 
 class GuestActivity :
-    NavigationActivity<ActivityGuestBinding>() {
+    NavigationActivity<ActivityGuestBinding>(),
+    FirebaseControl {
 
     override val navHostId: Int =
         R.id.nav_host_fragment_activity_guest
