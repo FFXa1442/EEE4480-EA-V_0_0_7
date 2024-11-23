@@ -124,11 +124,6 @@ data class ItineraryItem(
     override var imageCacheUrl: List<String> = listOf()
         private set
 
-    /**
-     * Constructs an ItineraryItem from a Parcel.
-     *
-     * @param parcel The Parcel to read the object's data from.
-     */
     private constructor(parcel: Parcel) : this(
         country = parcel.readString()!!,
         detail = parcel.readString()!!,
@@ -149,9 +144,6 @@ data class ItineraryItem(
         parcel.readStringList(imageCacheUrl)
     }
 
-    /**
-     * Default constructor for an empty ItineraryItem.
-     */
     constructor() : this(
         country = "",
         detail = "",
@@ -166,12 +158,6 @@ data class ItineraryItem(
         booking = null,
     )
 
-    /**
-     * Writes the ItineraryItem to a Parcel.
-     *
-     * @param parcel The Parcel to write the object's data into.
-     * @param flags Additional flags about how the object should be written.
-     */
     override fun writeToParcel(
         parcel: Parcel,
         flags: Int
@@ -190,18 +176,10 @@ data class ItineraryItem(
         parcel.writeStringList(imageCacheUrl)
     }
 
-    /**
-     * Describes the contents of the ItineraryItem.
-     *
-     * @return An integer hash code representing the contents of the ItineraryItem.
-     */
     override fun describeContents(): Int {
         return 0
     }
 
-    /**
-     * Companion object for creating ItineraryItem instances from a Parcel.
-     */
     companion object CREATOR : Parcelable.Creator<ItineraryExtra> {
         override fun createFromParcel(
             parcel: Parcel

@@ -10,10 +10,6 @@ import com.sample.application.ea.dataset.ItineraryItem
 import com.sample.application.ea.dataset.readonly.ItineraryExtra
 import java.util.Collections
 
-/**
- * ItineraryList is a singleton class that manages a list of itinerary items.
- * It provides methods for initializing the list, loading data, and adding/removing data change listeners.
- */
 class ItineraryList private constructor() {
 
     companion object {
@@ -28,41 +24,20 @@ class ItineraryList private constructor() {
 
         private var mImageLoadCompleted = false
 
-        /**
-         * Checks if the ItineraryList has been initialized.
-         *
-         * @return True if initialized, false otherwise.
-         */
         @JvmStatic
         fun hasInitialized() = mHasInitialized
 
-        /**
-         * Checks if the data load has been completed.
-         *
-         * @return True if data load completed, false otherwise.
-         */
         @JvmStatic
         fun loadCompleted() = mLoadCompleted
 
-        /**
-         * Checks if the image load has been completed.
-         *
-         * @return True if image load completed, false otherwise.
-         */
         @JvmStatic
         fun imageLoadCompleted() = mImageLoadCompleted
 
-        /**
-         * Sets the image load as completed.
-         */
         @JvmStatic
         fun setImageLoadCompleted() {
             mImageLoadCompleted = true
         }
 
-        /**
-         * Initializes the ItineraryList singleton.
-         */
         @JvmStatic
         fun initialize() {
             if (mHasInitialized) {
@@ -78,75 +53,41 @@ class ItineraryList private constructor() {
 
         }
 
-        /**
-         * Loads data into the ItineraryList.
-         */
         @JvmStatic
         fun loadData() {
             core.internalLoadData()
             mLoadCompleted = true
         }
 
-        /**
-         * Loads data and invokes the provided callback with the loaded data.
-         *
-         * @param callback The callback to be invoked with the loaded data.
-         */
         @JvmStatic
         fun loadData(callback: Consumer<List<ItineraryExtra>>) {
             callback.accept(core.itemList)
         }
 
-        /**
-         * Iterates over each item in the ItineraryList and invokes the provided callback.
-         *
-         * @param callback The callback to be invoked for each item.
-         */
         @JvmStatic
         fun forEach(callback: Consumer<ItineraryExtra>) =
             core.itemList.forEach {
                 callback.accept(it)
             }
 
-        /**
-         * Returns the size of the ItineraryList.
-         *
-         * @return The size of the ItineraryList.
-         */
         @JvmStatic
         fun size() = core.itemList.size
 
-        /**
-         * Returns the item at the specified index in the ItineraryList.
-         *
-         * @param index The index of the item to be returned.
-         * @return The item at the specified index.
-         */
         @JvmStatic
         fun get(
-            index: Int
+            index: Int,
         ) = core.itemList[index]
 
-        /**
-         * Adds a data change listener to the ItineraryList.
-         *
-         * @param listener The listener to be added.
-         */
         @JvmStatic
         fun addOnDataChangeListener(
-            listener: OnDataChangeListener
+            listener: OnDataChangeListener,
         ) {
             core.mOnDataChangeEventListeners += listener
         }
 
-        /**
-         * Removes a data change listener from the ItineraryList.
-         *
-         * @param listener The listener to be removed.
-         */
         @JvmStatic
         fun removeOnDataChangeListener(
-            listener: OnDataChangeListener
+            listener: OnDataChangeListener,
         ) {
             core.mOnDataChangeEventListeners -= listener
         }
@@ -162,9 +103,6 @@ class ItineraryList private constructor() {
 
     private val mOnDataChangeEventListeners = hashSetOf<OnDataChangeListener>()
 
-    /**
-     * Loads data internally from the Firebase Database.
-     */
     private fun internalLoadData() {
         if (mLoadCompleted) return
         FirebaseDatabase.getInstance().getReference()
@@ -173,20 +111,12 @@ class ItineraryList private constructor() {
             .addListenerForSingleValueEvent(mOnValueEventListener)
     }
 
-    /**
-     * Abstract class for listening to data changes in the ItineraryList.
-     */
     abstract class OnDataChangeListener(
-        private val id: Int = System.identityHashCode(this)
+        private val id: Int = System.identityHashCode(this),
     ) {
 
-        /**
-         * Called when the data changes.
-         *
-         * @param list The list of itinerary extras.
-         */
         abstract fun onDataChange(
-            list: List<ItineraryExtra>
+            list: List<ItineraryExtra>,
         )
 
         final override fun equals(other: Any?): Boolean {
@@ -208,18 +138,10 @@ class ItineraryList private constructor() {
         }
     }
 
-    /**
-     * Inner class for handling value events from the Firebase Database.
-     */
     private inner class OnValueEventListener : ValueEventListener {
 
-        /**
-         * Called when the data is successfully read from the database.
-         *
-         * @param snapshot The data snapshot.
-         */
         override fun onDataChange(
-            snapshot: DataSnapshot
+            snapshot: DataSnapshot,
         ) {
             val list = arrayListOf<ItineraryItem>()
             for (item in snapshot.children) {
@@ -232,13 +154,8 @@ class ItineraryList private constructor() {
                 listener.onDataChange(readonlyList)
         }
 
-        /**
-         * Called when the database read is cancelled.
-         *
-         * @param error The database error.
-         */
         override fun onCancelled(
-            error: DatabaseError
+            error: DatabaseError,
         ) {
             Log.e(
                 "InformationValueEventListener",
@@ -246,8 +163,6 @@ class ItineraryList private constructor() {
                 error.toException()
             )
         }
-
-
     }
 
 }
