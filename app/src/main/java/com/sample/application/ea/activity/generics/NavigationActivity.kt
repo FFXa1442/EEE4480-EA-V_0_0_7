@@ -13,8 +13,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.sample.application.ea.utilities.TryUtil.tryNonNull
-import com.sample.application.ea.utilities.TryUtil.tryNonNullElse
 import com.sample.application.ea.widget.state.BottomNavViewState
 import com.sample.application.ea.widget.state.ToolbarState
 
@@ -38,7 +36,7 @@ abstract class NavigationActivity<TBinding> :
 
     protected open val appBarConfBuilder: AppBarConfiguration.Builder? = null
 
-    protected val navController: NavController
+    private val navController: NavController
         get() = findNavController(navHostId)
 
     fun navigate(
@@ -46,69 +44,79 @@ abstract class NavigationActivity<TBinding> :
         args: Bundle? = null,
     ) = navController.navigate(id, args)
 
-    fun navigateUp() = tryNonNullElse(
-        appBarConfiguration,
-        navController::navigateUp,
-        navController::navigateUp
-    )
-
-    @CallSuper
-    override fun onCreate(savedInstanceState: Bundle?) =
-        super.onCreate(savedInstanceState).apply {
-            tryNonNull(toolbar) {
-                setSupportActionBar(it)
-            }
-
-            navController.let { navCtrl ->
-                tryNonNull(appBarConfBuilder?.build()) { conf ->
-                    appBarConfiguration = conf
-                    setupActionBarWithNavController(
-                        navCtrl,
-                        conf
-                    )
+    fun navigateUp() {
+        appBarConfiguration.let { conf ->
+            when (conf) {
+                null -> {
+                    navController.navigateUp()
                 }
 
-                tryNonNull(supportActionBar) { appBar ->
-                    appBar.setDisplayShowTitleEnabled(false)
-                }
-
-                tryNonNull(navView) { nav ->
-                    nav.setupWithNavController(navCtrl)
+                else -> {
+                    navController.navigateUp(conf)
                 }
             }
         }
-
-    override fun showToolbar() = tryNonNull(
-        toolbar
-    ) {
-        it.visibility = View.VISIBLE
     }
 
-    override fun hideToolbar() = tryNonNull(
-        toolbar
-    ) {
-        it.visibility = View.GONE
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        toolbar?.let {
+            setSupportActionBar(it)
+        }
+
+        navController.let { navCtrl ->
+
+            appBarConfBuilder?.build()?.apply {
+                appBarConfiguration = this
+                setupActionBarWithNavController(
+                    navCtrl,
+                    this
+                )
+            }
+
+            supportActionBar?.apply {
+                setDisplayShowTitleEnabled(false)
+            }
+
+            navView?.apply {
+                setupWithNavController(navCtrl)
+            }
+        }
+    }
+
+    override fun showToolbar() {
+        toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideToolbar() {
+        toolbar?.apply {
+            visibility = View.GONE
+        }
     }
 
     protected open fun setTemplateBottomMargin(
         value: Int,
     ) = Unit
 
-    override fun showNavView() = tryNonNull(
-        navView
-    ) {
-        it.visibility = View.VISIBLE
-        it.post {
-            setTemplateBottomMargin(it.height)
+    override fun showNavView() {
+        navView?.apply {
+            visibility = View.VISIBLE
+            post {
+                setTemplateBottomMargin(height)
+            }
         }
     }
 
-    override fun hideNavView() = tryNonNull(
-        navView
-    ) {
-        it.visibility = View.GONE
-        it.post {
-            setTemplateBottomMargin(0)
+    override fun hideNavView() {
+        navView?.apply {
+            visibility = View.GONE
+            post {
+                setTemplateBottomMargin(0)
+            }
         }
     }
 

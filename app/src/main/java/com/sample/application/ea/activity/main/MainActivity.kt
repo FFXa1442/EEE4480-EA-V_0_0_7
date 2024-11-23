@@ -31,7 +31,7 @@ class MainActivity :
 
     override val appBarConfBuilder: AppBarConfiguration.Builder
         get() = AppBarConfiguration.Builder(
-            R.id.nav_home,
+            R.id.nav_ticket,
             R.id.nav_category,
             R.id.nav_schedule_view
         )

@@ -1,5 +1,6 @@
 package com.sample.application.ea.ui.main.category
 
+import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import com.sample.application.ea.databinding.FragmentCategoryBinding
@@ -32,7 +33,8 @@ fun CategoryFragment.setupSideViewButton(
                         target = first,
                         searchView = searchView,
                         currentCategory = currentCategory,
-                        filter = filter
+                        filter = filter,
+                        getTextWatcher = { searchViewTextWatcher }
                     )
                 )
             }
@@ -45,11 +47,16 @@ private class CateMenuButtonOnClickListener(
     val searchView: EditText,
     val currentCategory: AtomicReference<String>,
     val filter: (String) -> Unit,
+    val getTextWatcher: () -> TextWatcher,
 ) : View.OnClickListener {
 
     override fun onClick(v: View?) {
         var curCate: String by currentCategory
-        searchView.setText("")
+        searchView.apply {
+            removeTextChangedListener(getTextWatcher())
+            setText("")
+            addTextChangedListener(getTextWatcher())
+        }
         curCate = target
         filter(curCate)
     }

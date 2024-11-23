@@ -12,8 +12,6 @@ import com.sample.application.ea.R
 import com.sample.application.ea.activity.generics.ViewDataBindingActivity
 import com.sample.application.ea.databinding.ActivityYoutubeBinding
 import com.sample.application.ea.extension.getValue
-import com.sample.application.ea.extension.setValue
-import com.sample.application.ea.utilities.TryUtil.tryNonNull
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
@@ -51,7 +49,7 @@ class YoutubeActivity :
             override fun handleOnBackPressed() {
                 when {
                     flag -> {
-                        tryNonNull(ytPlayer, YouTubePlayer::toggleFullscreen)
+                        ytPlayer?.toggleFullscreen()
                     }
 
                     else -> {

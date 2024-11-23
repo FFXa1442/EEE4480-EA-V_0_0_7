@@ -83,8 +83,8 @@ private fun ChangeUserPasswordFragment.saveNewPassword(
     oldPw: String,
     newPw: String,
 ) {
-    val dialog = LoadingDialog().apply {
-        show(childFragmentManager, "Loading Dialog")
+    val dialog = LoadingDialog().also {
+        it.show(childFragmentManager, "Loading Dialog")
     }
 
     user.reauthenticate(EmailAuthProvider.getCredential(user.email!!, oldPw))

@@ -4,8 +4,13 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -54,39 +59,24 @@ fun ScheduleViewFragment.onDatePickerButtonClick() {
     }
 }
 
-fun ScheduleViewFragment.setHint() {
-    currentUser.also { user ->
-        container.binding.nothing.visibility = when (user) {
-            null -> View.GONE
-            else -> View.VISIBLE
-        }
-        container.binding.buttonLayout.visibility = when (user) {
-            null -> View.VISIBLE
-            else -> View.GONE
-        }
-    }
+fun ScheduleViewFragment.setHint() = setHint(currentUser)
 
+fun ScheduleViewFragment.setHint(user: FirebaseUser?) {
+    container.binding.nothing.visibility = when (user) {
+        null -> View.GONE
+        else -> View.VISIBLE
+    }
+    container.binding.buttonLayout.visibility = when (user) {
+        null -> View.VISIBLE
+        else -> View.GONE
+    }
 }
 
-private val ScheduleViewFragment.launcher: ActivityResultLauncher<Intent>
-    get() {
-        (container as ScheduleViewContainerInternal).apply {
-            when (launcher) {
-                null -> {
-                    launcher =
-                        mainActivity.registerForActivityResult(
-                            ActivityResultContracts.StartActivityForResult()
-                        ) { o ->
-                            if (o.resultCode == Activity.RESULT_OK) {
-                                setupList()
-                            }
-                        }
-                }
-            }
-            return launcher!!
-        }
+val ScheduleViewFragment.authStateListener: FirebaseAuth.AuthStateListener
+    get() = (container as ScheduleViewContainerInternal).authStateListener
 
-    }
+private val ScheduleViewFragment.launcher: ActivityResultLauncher<Intent>
+    get() = (container as ScheduleViewContainerInternal).launcher
 
 private fun ScheduleViewFragment.setupList() {
     val user = currentUser ?: return
@@ -106,20 +96,46 @@ fun ScheduleViewFragment.ScheduleViewContainer(
     getBinding = getBinding,
     getValueEventAction = getValueEventAction,
     getViewModel = getViewModel,
+    setupList = ::setupList,
+    registerForActivityResult = ::registerForActivityResult,
+    setHint = ::setHint,
 ) as ScheduleViewContainer
+
+private typealias RegisterForActivityResult<I, O> = (
+    ActivityResultContract<I, O>,
+    ActivityResultCallback<O>,
+) -> ActivityResultLauncher<I>
 
 private class ScheduleViewContainerInternal(
     val getMainActivity: () -> MainActivity,
     val getBinding: () -> FragmentScheduleViewBinding,
     val getValueEventAction: (DataSnapshot) -> Unit,
     val getViewModel: () -> MainViewModel,
+    val setHint: (FirebaseUser?) -> Unit,
+    val setupList: () -> Unit,
+    val registerForActivityResult: RegisterForActivityResult<Intent, ActivityResult>,
 ) : ScheduleViewContainer(
     getMainActivity = getMainActivity,
     getBinding = getBinding,
     getValueEventAction = getValueEventAction,
     getViewModel = getViewModel,
 ) {
-    var launcher: ActivityResultLauncher<Intent>? = null
+    val launcher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { o ->
+        if (o.resultCode == Activity.RESULT_OK) {
+            setupList()
+        }
+    }
+
+    val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+        val user = firebaseAuth.currentUser
+        binding.signOutButton.visibility = when (user) {
+            null -> View.INVISIBLE
+            else -> View.VISIBLE
+        }
+        setHint(user)
+    }
 }
 
 abstract class ScheduleViewContainer(

@@ -17,18 +17,21 @@ inline fun TextView.addTextChangedListener(
         (text: CharSequence?) -> Unit = {},
     crossinline onTextChanged:
         (text: CharSequence?) -> Unit = {},
-) = addTextChangedListener(object : TextWatcher {
+): TextWatcher {
+    val textWatcher = object : TextWatcher {
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        beforeTextChanged(s)
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            beforeTextChanged(s)
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            onTextChanged(s)
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+
     }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        onTextChanged(s)
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-        TODO("Not yet implemented")
-    }
-
-})
+    addTextChangedListener(textWatcher)
+    return textWatcher
+}

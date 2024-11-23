@@ -1,5 +1,7 @@
 package com.sample.application.ea.ui.main.schedule.constant
 
+import android.widget.EditText
+
 object Constant {
 
     const val DATE: String = "DATE"

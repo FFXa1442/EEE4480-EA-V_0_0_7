@@ -1,6 +1,8 @@
 package com.sample.application.ea.ui.main.generic
 
 import android.os.Bundle
+import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
@@ -35,7 +37,9 @@ abstract class ItineraryListViewFragment<TBinding> :
     override fun onCreateView(binding: TBinding, savedInstanceState: Bundle?) {
         setupUI(binding.root)
         setupSideViewButton(binding)
-        setupRecyclerView()
+        setupRecyclerView {
+            searchViewTextWatcher = it
+        }
     }
 
     protected open fun setupSideViewButton(
@@ -51,4 +55,6 @@ abstract class ItineraryListViewFragment<TBinding> :
 
     internal abstract fun onSearchTextChanged(s: CharSequence?)
 
+    internal lateinit var searchViewTextWatcher: TextWatcher
+        private set
 }

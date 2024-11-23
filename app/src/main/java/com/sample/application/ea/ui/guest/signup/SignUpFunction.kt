@@ -13,8 +13,8 @@ fun SignUpFragment.signUp(
     firebaseAuth: FirebaseAuth,
 ) {
 
-    val dialog = LoadingDialog().apply {
-        show(childFragmentManager, "Loading Dialog")
+    val dialog = LoadingDialog().also {
+        it.show(childFragmentManager, "Loading Dialog")
     }
 
     firebaseAuth.apply {

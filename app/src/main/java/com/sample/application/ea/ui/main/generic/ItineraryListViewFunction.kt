@@ -3,6 +3,7 @@ package com.sample.application.ea.ui.main.generic
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -49,6 +50,7 @@ fun <TBinding> ItineraryListViewFragment<TBinding>.setupUI(
 }
 
 fun <TBinding> ItineraryListViewFragment<TBinding>.setupRecyclerView(
+    searchViewWatcherCallback: (TextWatcher) -> Unit = {},
 ) where TBinding : ViewDataBinding {
     if (adapter == null) {
         val newList = mutableListOf<ItineraryExtra>()
@@ -63,15 +65,17 @@ fun <TBinding> ItineraryListViewFragment<TBinding>.setupRecyclerView(
     }
 
     adapter!!.apply {
-        setMatchFilter(::matchFilter)
-        setOnItemClick { item ->
-            if (sheet == null) {
-                sheet = DescriptionFragment().apply {
-                    setOnDismissAction { sheet = null }
-                    setArguments(Bundle().apply {
-                        putParcelable(DescriptionFragment.ARG_TAG, item)
-                    })
-                    show(childFragmentManager, "DescriptionFragment")
+        matchFilter = this@setupRecyclerView::matchFilter
+        onItemClickListener = { item ->
+            when (sheet) {
+                null -> {
+                    DescriptionFragment().apply {
+                        sheet = this
+                        setOnDismissAction { sheet = null }
+                        setArguments(Bundle().apply {
+                            putParcelable(DescriptionFragment.ARG_TAG, item)
+                        })
+                    }.show(childFragmentManager, "DescriptionFragment")
                 }
             }
         }
@@ -81,6 +85,7 @@ fun <TBinding> ItineraryListViewFragment<TBinding>.setupRecyclerView(
     recyclerView.layoutManager = LinearLayoutManager(
         mainActivity, RecyclerView.VERTICAL, false
     )
-    searchView.doOnTextChanged(::onSearchTextChanged)
-
+    searchViewWatcherCallback(
+        searchView.doOnTextChanged(::onSearchTextChanged)
+    )
 }

@@ -25,8 +25,8 @@ fun ChangeUserNameFragment.onSubmitButtonClick(
         }
     }
 
-    val dialog = LoadingDialog().apply {
-        show(childFragmentManager, "Loading Dialog")
+    val dialog = LoadingDialog().also {
+        it.show(childFragmentManager, "Loading Dialog")
     }
 
     user.updateProfile(UserProfileChangeRequest.Builder().apply {

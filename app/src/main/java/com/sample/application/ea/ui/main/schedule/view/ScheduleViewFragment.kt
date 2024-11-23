@@ -58,32 +58,31 @@ class ScheduleViewFragment : MainBindingFragment<FragmentScheduleViewBinding>() 
                         onRemoveButtonClick = { item ->
                             firebaseDatabase
                                 .getReference(
-                                    java.lang.String.format(
-                                        "user/%s/%s",
-                                        currentUser!!.uid,
-                                        item.item()
-                                    )
+                                    "user/${currentUser!!.uid}/${item.item()}"
                                 )
                                 .removeValue()
-                                .addOnSuccessListener {
+//                                .addOnSuccessListener {
 //                                    Log.d("Testing - onRemoveButtonClick", "Item removed successfully.")
-                                }
-                                .addOnFailureListener {
+//                                }
+//                                .addOnFailureListener {
 //                                    Log.d(
 //                                        "Testing - onRemoveButtonClick",
 //                                        "Error removing item: " + it.message,
 //                                        it
 //                                    )
-                                }
+//                                }
                         }
                         onItemClick = { item ->
-                            val args = Bundle()
-                            val c: Calendar = item.calender()
-                            args.putString(DATE, c.toSlashSeparatedDate())
-                            args.putString(TIME, c.to24HourTime())
-                            args.putString(TITLE, item.title)
-                            args.putString(CONTENT, item.content)
-                            navigate(R.id.action_nav_schedule_view_to_nav_schedule_editor, args)
+                            navigate(
+                                id = R.id.action_nav_schedule_view_to_nav_schedule_editor,
+                                args = Bundle().apply {
+                                    val c: Calendar = item.calender()
+                                    putString(DATE, c.toSlashSeparatedDate())
+                                    putString(TIME, c.to24HourTime())
+                                    putString(TITLE, item.title)
+                                    putString(CONTENT, item.content)
+                                }
+                            )
                         }
                     }
 
@@ -93,6 +92,15 @@ class ScheduleViewFragment : MainBindingFragment<FragmentScheduleViewBinding>() 
         }
     )
 
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth.addAuthStateListener(authStateListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        firebaseAuth.removeAuthStateListener(authStateListener)
+    }
 
     override fun onCreateView(
         binding: FragmentScheduleViewBinding,

@@ -65,8 +65,8 @@ class SignInHelper private constructor(
     }
 
     fun signIn() {
-        val dialog = LoadingDialog().apply {
-            show(
+        val dialog = LoadingDialog().also {
+            it.show(
                 this@SignInHelper.fragmentManager,
                 "Loading Dialog"
             )

@@ -3,6 +3,7 @@ package com.sample.application.ea.ui.guest.signin
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.sample.application.ea.R
 import com.sample.application.ea.databinding.FragmentSignInBinding
@@ -41,17 +42,17 @@ class SignInFragment : GuestBindingFragment<FragmentSignInBinding>() {
                                 setResult(RESULT_OK)
                                 finish()
                             }
-                            setOnFailureListener { _ ->
-                                AlertDialog.Builder(requireContext())
-                                    .setTitle("Error")
-                                    .setMessage("The email address or password is incorrect.")
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK") { _, _ ->
-                                        binding.userEmailEditText.setText("")
-                                        binding.userPasswordEditText.setText("")
-                                    }
-                                    .create().show()
-                            }
+                        }
+                        setOnFailureListener { _ ->
+                            AlertDialog.Builder(requireContext())
+                                .setTitle("Error")
+                                .setMessage("The email address or password is incorrect.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK") { _, _ ->
+                                    binding.userEmailEditText.setText("")
+                                    binding.userPasswordEditText.setText("")
+                                }
+                                .create().show()
                         }
                         signIn()
                     }
@@ -64,40 +65,44 @@ class SignInFragment : GuestBindingFragment<FragmentSignInBinding>() {
                 }
             }
 
-            binding.signUpButton.setOnClickListener { _ ->
-                navigate(R.id.action_nav_sign_in_to_nav_sign_up)
-            }
+        }
 
-            binding.userEmailEditText.doOnTextChanged { s ->
-                when {
-                    s!!.isEmpty() -> {
-                        checker.updateEmailState(false)
-                        binding.userEmailTextLayout.error = null
-                    }
 
-                    EmailValidation.patternMatches(s.toString()) -> {
-                        checker.updateEmailState(true)
-                        binding.userEmailTextLayout.error = null
-                    }
+        binding.signUpButton.setOnClickListener { _ ->
+            navigate(R.id.action_nav_sign_in_to_nav_sign_up)
+        }
 
-                    else -> {
-                        checker.updateEmailState(false)
-                        binding.userEmailTextLayout.error = "Invalid email address"
-                    }
+        binding.userEmailEditText.doOnTextChanged { s ->
+
+            when {
+                s.isNullOrEmpty() -> {
+                    checker.updateEmailState(false)
+                    binding.userEmailTextLayout.error = null
+                }
+
+                EmailValidation.patternMatches(s.toString()) -> {
+                    checker.updateEmailState(true)
+                    binding.userEmailTextLayout.error = null
+                }
+
+                else -> {
+                    checker.updateEmailState(false)
+                    binding.userEmailTextLayout.error = "Invalid email address"
                 }
             }
 
-            binding.userPasswordEditText.doOnTextChanged { s ->
-                when {
-                    s!!.isEmpty() || PasswordValidation.patternMatches(s.toString()) -> {
-                        checker.updatePasswordState(true)
-                        binding.userPasswordTextLayout.error = null
-                    }
+        }
 
-                    else -> {
-                        checker.updatePasswordState(false)
-                        binding.userPasswordTextLayout.error = PASSWORD_INVALID_MESSAGE
-                    }
+        binding.userPasswordEditText.doOnTextChanged { s ->
+            when {
+                s!!.isEmpty() || PasswordValidation.patternMatches(s.toString()) -> {
+                    checker.updatePasswordState(true)
+                    binding.userPasswordTextLayout.error = null
+                }
+
+                else -> {
+                    checker.updatePasswordState(false)
+                    binding.userPasswordTextLayout.error = PASSWORD_INVALID_MESSAGE
                 }
             }
         }
