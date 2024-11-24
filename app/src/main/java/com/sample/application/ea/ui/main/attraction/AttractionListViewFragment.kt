@@ -10,7 +10,7 @@ import com.sample.application.ea.activity.main.MainActivity
 import com.sample.application.ea.dataset.readonly.Attraction
 import com.sample.application.ea.ui.main.description.DescriptionFragment
 import com.sample.application.ea.ui.main.generic.MainBindingFragment
-import com.sample.application.ea.widget.ItineraryListAdapter
+import com.sample.application.ea.widget.AttractionListAdapter
 import java.util.regex.Pattern
 
 abstract class AttractionListViewFragment<TBinding> :
@@ -23,7 +23,7 @@ abstract class AttractionListViewFragment<TBinding> :
 
     internal abstract val recyclerView: RecyclerView
 
-    internal var adapter: ItineraryListAdapter? = null
+    internal var adapter: AttractionListAdapter? = null
 
     internal var sheet: DescriptionFragment? = null
 

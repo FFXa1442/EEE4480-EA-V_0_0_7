@@ -17,15 +17,15 @@ import com.sample.application.ea.dataset.readonly.Attraction
 import com.sample.application.ea.dataset.readonly.AttractionExtra
 import java.util.regex.Pattern
 
-abstract class ItineraryListAdapter(
+abstract class AttractionListAdapter(
     private val context: Context,
-) : RecyclerView.Adapter<ItineraryListAdapter.ViewHolder>(),
+) : RecyclerView.Adapter<AttractionListAdapter.ViewHolder>(),
     Filterable {
 
     companion object {
 
         fun create(supplier: () -> Context) =
-            object : ItineraryListAdapter(supplier()) {
+            object : AttractionListAdapter(supplier()) {
                 private var _originalList: List<AttractionExtra>? = null
                 override var originalList: List<AttractionExtra>
                     get() = _originalList!!

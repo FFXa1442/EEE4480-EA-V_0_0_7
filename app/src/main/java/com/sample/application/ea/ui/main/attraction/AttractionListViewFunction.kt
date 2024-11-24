@@ -15,7 +15,7 @@ import com.sample.application.ea.database.AttractionList
 import com.sample.application.ea.dataset.readonly.AttractionExtra
 import com.sample.application.ea.text.doOnTextChanged
 import com.sample.application.ea.ui.main.description.DescriptionFragment
-import com.sample.application.ea.widget.ItineraryListAdapter
+import com.sample.application.ea.widget.AttractionListAdapter
 
 fun <TBinding> AttractionListViewFragment<TBinding>.hideKeyboard(
 ) where TBinding : ViewDataBinding {
@@ -59,7 +59,7 @@ fun <TBinding> AttractionListViewFragment<TBinding>.setupRecyclerView(
                 filterByPopularity(item) -> newList += item
             }
         }
-        adapter = ItineraryListAdapter.create { mainActivity }.also {
+        adapter = AttractionListAdapter.create { mainActivity }.also {
             it.originalList = newList
         }
     }
