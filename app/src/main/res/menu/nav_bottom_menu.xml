@@ -8,9 +8,9 @@
         android:title="Ticket" />
 
     <item
-        android:id="@+id/nav_category"
+        android:id="@+id/nav_attraction"
         android:icon="@drawable/baseline_manage_search_24"
-        android:title="Category" />
+        android:title="Attraction" />
 
     <item
         android:id="@+id/nav_schedule_view"

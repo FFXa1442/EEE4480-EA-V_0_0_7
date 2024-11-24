@@ -1,17 +1,16 @@
-package com.sample.application.ea.ui.main.category
+package com.sample.application.ea.ui.main.attraction
 
 import android.widget.EditText
 import androidx.lifecycle.AtomicReference
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.application.ea.R
-import com.sample.application.ea.databinding.FragmentCategoryBinding
+import com.sample.application.ea.databinding.FragmentAttractionBinding
 import com.sample.application.ea.dataset.readonly.Itinerary
 import com.sample.application.ea.extension.getValue
-import com.sample.application.ea.ui.main.generic.ItineraryListViewFragment
 import java.util.regex.Pattern
 
-class CategoryFragment :
-    ItineraryListViewFragment<FragmentCategoryBinding>() {
+class AttractionFragment :
+    AttractionListViewFragment<FragmentAttractionBinding>() {
 
     private val currentCategory = AtomicReference<String>("")
 
@@ -28,7 +27,7 @@ class CategoryFragment :
     }
 
     override fun setupSideViewButton(
-        binding: FragmentCategoryBinding,
+        binding: FragmentAttractionBinding,
     ) = setupSideViewButton(
         binding = binding,
         currentCategory = currentCategory,
@@ -40,5 +39,5 @@ class CategoryFragment :
         filter("^(?=.*$curCate)(?=.*$s).*")
     }
 
-    override val layoutId: Int = R.layout.fragment_category
+    override val layoutId: Int = R.layout.fragment_attraction
 }

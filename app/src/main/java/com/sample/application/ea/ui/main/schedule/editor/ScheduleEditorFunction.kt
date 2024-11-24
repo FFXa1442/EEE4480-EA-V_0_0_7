@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -102,12 +101,21 @@ fun ScheduleEditorFragment.onTimePickerButtonClick() {
 
 fun ScheduleEditorFragment.onSaveButtonClick() {
 
-    val id = currentUser!!.uid
-
     val set = ScheduleSet().apply {
         container.binding.also { binding ->
+            title = binding.title.text.toString().trim().also { titleStr ->
+                when {
+                    titleStr.isEmpty() -> {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Error")
+                            .setMessage("Title cannot be empty.")
+                            .setPositiveButton("OK", null)
+                            .create().show()
+                        return@onSaveButtonClick
+                    }
+                }
+            }
             content = binding.content.text.toString().trim()
-            title = binding.title.text.toString().trim()
         }
         year = container.year
         month = container.month
@@ -116,21 +124,13 @@ fun ScheduleEditorFragment.onSaveButtonClick() {
         minute = container.minute
     }
 
-    when {
-        set.content.isEmpty() -> {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Error")
-                .setMessage("Title cannot be empty.")
-                .setPositiveButton("OK", null)
-                .create().show()
-            return
-        }
-    }
+    assert(set.title.isNotEmpty()) { "Title must not be empty." }
 
+    val id = currentUser!!.uid
     val d = container.oldDate.split("/").joinToString("")
     val t = container.oldTime.split(":").joinToString("")
 
-    val node = firebaseDatabase.getReference("user/$id/$d$t")
+    val node = firebaseDatabase.getReference("user/${currentUser!!.uid}/$d$t")
 
     node.apply {
         addListenerForSingleValueEvent(object : ValueEventListener {

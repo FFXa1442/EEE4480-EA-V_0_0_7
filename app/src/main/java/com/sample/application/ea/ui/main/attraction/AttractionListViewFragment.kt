@@ -1,8 +1,7 @@
-package com.sample.application.ea.ui.main.generic
+package com.sample.application.ea.ui.main.attraction
 
 import android.os.Bundle
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
@@ -10,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sample.application.ea.activity.main.MainActivity
 import com.sample.application.ea.dataset.readonly.Itinerary
 import com.sample.application.ea.ui.main.description.DescriptionFragment
+import com.sample.application.ea.ui.main.generic.MainBindingFragment
 import com.sample.application.ea.widget.ItineraryListAdapter
 import java.util.regex.Pattern
 
-abstract class ItineraryListViewFragment<TBinding> :
+abstract class AttractionListViewFragment<TBinding> :
     MainBindingFragment<TBinding> where TBinding : ViewDataBinding {
 
     internal val mainActivity: MainActivity

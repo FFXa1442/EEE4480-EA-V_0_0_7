@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        tools:context=".ui.main.category.CategoryFragment">
+        tools:context=".ui.main.attraction.AttractionFragment">
 
         <com.sample.application.ea.widget.CategoryView
             android:id="@+id/cate_menu"
@@ -35,7 +35,7 @@
                     android:background="@drawable/edit_text_background"
                     android:drawableStart="@drawable/baseline_search_24"
                     android:drawablePadding="15dp"
-                    android:hint="Itinerary"
+                    android:hint="Country / Attraction"
                     android:padding="10dp" />
 
             </RelativeLayout>

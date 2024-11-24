@@ -1,4 +1,4 @@
-package com.sample.application.ea.ui.main.generic
+package com.sample.application.ea.ui.main.attraction
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,7 +17,7 @@ import com.sample.application.ea.text.doOnTextChanged
 import com.sample.application.ea.ui.main.description.DescriptionFragment
 import com.sample.application.ea.widget.ItineraryListAdapter
 
-fun <TBinding> ItineraryListViewFragment<TBinding>.hideKeyboard(
+fun <TBinding> AttractionListViewFragment<TBinding>.hideKeyboard(
 ) where TBinding : ViewDataBinding {
     searchView.clearFocus()
     mainActivity.getSystemService(
@@ -30,7 +30,7 @@ fun <TBinding> ItineraryListViewFragment<TBinding>.hideKeyboard(
 }
 
 @SuppressLint("ClickableViewAccessibility")
-fun <TBinding> ItineraryListViewFragment<TBinding>.setupUI(
+fun <TBinding> AttractionListViewFragment<TBinding>.setupUI(
     view: View,
 ) where TBinding : ViewDataBinding {
     when (view) {
@@ -49,7 +49,7 @@ fun <TBinding> ItineraryListViewFragment<TBinding>.setupUI(
     }
 }
 
-fun <TBinding> ItineraryListViewFragment<TBinding>.setupRecyclerView(
+fun <TBinding> AttractionListViewFragment<TBinding>.setupRecyclerView(
     searchViewWatcherCallback: (TextWatcher) -> Unit = {},
 ) where TBinding : ViewDataBinding {
     if (adapter == null) {

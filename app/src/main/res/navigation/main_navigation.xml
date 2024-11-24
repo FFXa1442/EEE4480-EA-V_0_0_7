@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_ticket" />
 
     <fragment
-        android:id="@+id/nav_category"
-        android:name="com.sample.application.ea.ui.main.category.CategoryFragment"
-        android:label="Category"
-        tools:layout="@layout/fragment_category" />
+        android:id="@+id/nav_attraction"
+        android:name="com.sample.application.ea.ui.main.attraction.AttractionFragment"
+        android:label="Attraction"
+        tools:layout="@layout/fragment_attraction" />
     <fragment
         android:id="@+id/nav_schedule_view"
         android:name="com.sample.application.ea.ui.main.schedule.view.ScheduleViewFragment"
