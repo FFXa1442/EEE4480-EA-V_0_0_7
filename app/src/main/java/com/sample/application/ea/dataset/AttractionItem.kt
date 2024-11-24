@@ -9,17 +9,17 @@ import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.sample.application.ea.dataset.readonly.ItineraryExtra
+import com.sample.application.ea.dataset.readonly.AttractionExtra
 import com.sample.application.ea.tasks.AsyncProcessing
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.atomic.AtomicInteger
 
-data class ItineraryItem(
+data class AttractionItem(
     override var country: String,
     override var detail: String,
-    override var itinerary: String,
+    override var attraction: String,
     override var youtubeUrl: String,
     override var imageUrl: List<String>,
     override var latitude: Double,
@@ -29,7 +29,7 @@ data class ItineraryItem(
     override var youtubeId: String,
     override var booking: String?
 
-) : ItineraryExtra {
+) : AttractionExtra {
 
     private fun internalSaveImageCache(
         context: Context,
@@ -127,7 +127,7 @@ data class ItineraryItem(
     private constructor(parcel: Parcel) : this(
         country = parcel.readString()!!,
         detail = parcel.readString()!!,
-        itinerary = parcel.readString()!!,
+        attraction = parcel.readString()!!,
         youtubeUrl = parcel.readString()!!,
         imageUrl = parcel.let { p ->
             val list = listOf<String>()
@@ -147,7 +147,7 @@ data class ItineraryItem(
     constructor() : this(
         country = "",
         detail = "",
-        itinerary = "",
+        attraction = "",
         youtubeUrl = "",
         imageUrl = listOf(),
         latitude = 0.0,
@@ -164,7 +164,7 @@ data class ItineraryItem(
     ) {
         parcel.writeString(country)
         parcel.writeString(detail)
-        parcel.writeString(itinerary)
+        parcel.writeString(attraction)
         parcel.writeString(youtubeUrl)
         parcel.writeStringList(imageUrl)
         parcel.writeDouble(latitude)
@@ -180,16 +180,16 @@ data class ItineraryItem(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ItineraryExtra> {
+    companion object CREATOR : Parcelable.Creator<AttractionExtra> {
         override fun createFromParcel(
             parcel: Parcel
-        ): ItineraryExtra {
-            return ItineraryItem(parcel)
+        ): AttractionExtra {
+            return AttractionItem(parcel)
         }
 
         override fun newArray(
             size: Int
-        ): Array<ItineraryExtra?> {
+        ): Array<AttractionExtra?> {
             return arrayOfNulls(size)
         }
     }

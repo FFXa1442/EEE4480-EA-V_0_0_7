@@ -1,6 +1,6 @@
 package com.sample.application.ea.dataset.readonly
 
-interface ItineraryExtra : Itinerary {
+interface AttractionExtra : Attraction {
 
     val imageCacheUrl: List<String>
 

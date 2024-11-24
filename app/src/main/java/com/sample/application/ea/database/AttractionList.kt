@@ -6,15 +6,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sample.application.ea.dataset.ItineraryItem
-import com.sample.application.ea.dataset.readonly.ItineraryExtra
+import com.sample.application.ea.dataset.AttractionItem
+import com.sample.application.ea.dataset.readonly.AttractionExtra
 import java.util.Collections
 
-class ItineraryList private constructor() {
+class AttractionList private constructor() {
 
     companion object {
 
-        private lateinit var core: ItineraryList
+        private lateinit var core: AttractionList
 
         private const val INITIALIZATION_ERROR = "Already initialized"
 
@@ -42,12 +42,12 @@ class ItineraryList private constructor() {
         fun initialize() {
             if (mHasInitialized) {
                 Log.d(
-                    ItineraryList::class.java.name,
+                    AttractionList::class.java.name,
                     INITIALIZATION_ERROR,
                     IllegalStateException(INITIALIZATION_ERROR)
                 )
             } else {
-                core = ItineraryList()
+                core = AttractionList()
                 mHasInitialized = true
             }
 
@@ -60,12 +60,12 @@ class ItineraryList private constructor() {
         }
 
         @JvmStatic
-        fun loadData(callback: Consumer<List<ItineraryExtra>>) {
+        fun loadData(callback: Consumer<List<AttractionExtra>>) {
             callback.accept(core.itemList)
         }
 
         @JvmStatic
-        fun forEach(callback: Consumer<ItineraryExtra>) =
+        fun forEach(callback: Consumer<AttractionExtra>) =
             core.itemList.forEach {
                 callback.accept(it)
             }
@@ -94,7 +94,7 @@ class ItineraryList private constructor() {
 
     }
 
-    private lateinit var itemList: ArrayList<ItineraryItem>
+    private lateinit var itemList: ArrayList<AttractionItem>
 
     private val readonlyList
         get() = Collections.unmodifiableList(itemList)
@@ -116,7 +116,7 @@ class ItineraryList private constructor() {
     ) {
 
         abstract fun onDataChange(
-            list: List<ItineraryExtra>,
+            list: List<AttractionExtra>,
         )
 
         final override fun equals(other: Any?): Boolean {
@@ -126,16 +126,14 @@ class ItineraryList private constructor() {
             )
             if (javaClass != other.javaClass)
                 throw IllegalArgumentException(
-                    "Argument 'other' must be of" +
+                    "Argument 'other' must be of " +
                             "type ${this.javaClass.simpleName}"
                 )
             other as OnDataChangeListener
             return id == other.id
         }
 
-        final override fun hashCode(): Int {
-            return id
-        }
+        final override fun hashCode() = id
     }
 
     private inner class OnValueEventListener : ValueEventListener {
@@ -143,10 +141,10 @@ class ItineraryList private constructor() {
         override fun onDataChange(
             snapshot: DataSnapshot,
         ) {
-            val list = arrayListOf<ItineraryItem>()
+            val list = arrayListOf<AttractionItem>()
             for (item in snapshot.children) {
                 with(list) {
-                    add(item.getValue(ItineraryItem::class.java)!!)
+                    add(item.getValue(AttractionItem::class.java)!!)
                 }
             }
             itemList = list

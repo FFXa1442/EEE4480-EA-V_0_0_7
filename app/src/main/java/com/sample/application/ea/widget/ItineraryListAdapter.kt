@@ -3,7 +3,6 @@ package com.sample.application.ea.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.application.ea.R
-import com.sample.application.ea.databinding.ViewItineraryItemBinding
-import com.sample.application.ea.dataset.readonly.Itinerary
-import com.sample.application.ea.dataset.readonly.ItineraryExtra
+import com.sample.application.ea.databinding.ViewAttractionItemBinding
+import com.sample.application.ea.dataset.readonly.Attraction
+import com.sample.application.ea.dataset.readonly.AttractionExtra
 import java.util.regex.Pattern
 
 abstract class ItineraryListAdapter(
@@ -27,8 +26,8 @@ abstract class ItineraryListAdapter(
 
         fun create(supplier: () -> Context) =
             object : ItineraryListAdapter(supplier()) {
-                private var _originalList: List<ItineraryExtra>? = null
-                override var originalList: List<ItineraryExtra>
+                private var _originalList: List<AttractionExtra>? = null
+                override var originalList: List<AttractionExtra>
                     get() = _originalList!!
                     set(value) {
                         when (_originalList) {
@@ -44,20 +43,20 @@ abstract class ItineraryListAdapter(
 
     }
 
-    protected var filterList: List<ItineraryExtra> = listOf()
+    protected var filterList: List<AttractionExtra> = listOf()
 
-    abstract var originalList: List<ItineraryExtra>
+    abstract var originalList: List<AttractionExtra>
 
-    var onItemClickListener: (Itinerary) -> Unit = {}
+    var onItemClickListener: (Attraction) -> Unit = {}
 
-    var matchFilter: (Pattern, Itinerary) -> List<Boolean> =
+    var matchFilter: (Pattern, Attraction) -> List<Boolean> =
         { _, _ -> listOf() }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ) = ViewHolder(
-        ViewItineraryItemBinding.inflate(
+        ViewAttractionItemBinding.inflate(
             LayoutInflater.from(context),
             parent,
             false
@@ -87,7 +86,7 @@ abstract class ItineraryListAdapter(
                 }
             }
 
-            labelView.text = item.itinerary
+            labelView.text = item.attraction
             button.setOnClickListener {
                 onItemClickListener(item)
             }
@@ -99,7 +98,7 @@ abstract class ItineraryListAdapter(
     override fun getFilter() = ItemFilter() as Filter
 
     class ViewHolder(
-        binding: ViewItineraryItemBinding,
+        binding: ViewAttractionItemBinding,
         val imageView: ImageView = binding.itemImageView,
         val labelView: TextView = binding.itemTitleView,
         val button: View = binding.button,
@@ -109,7 +108,7 @@ abstract class ItineraryListAdapter(
 
         fun matches(
             pattern: String,
-            set: ItineraryExtra,
+            set: AttractionExtra,
         ): Boolean {
             matchFilter(
                 Pattern.compile(pattern, Pattern.CASE_INSENSITIVE),
@@ -127,7 +126,7 @@ abstract class ItineraryListAdapter(
         ) = FilterResults().apply {
             when {
                 constraint.isNullOrEmpty() -> originalList
-                else -> mutableListOf<ItineraryExtra>().apply {
+                else -> mutableListOf<AttractionExtra>().apply {
                     originalList
                         .asSequence()
                         .filter {
@@ -149,7 +148,7 @@ abstract class ItineraryListAdapter(
         override fun publishResults(
             constraint: CharSequence?, results: FilterResults?,
         ) {
-            filterList = results!!.values as List<ItineraryExtra>
+            filterList = results!!.values as List<AttractionExtra>
             notifyDataSetChanged()
         }
 

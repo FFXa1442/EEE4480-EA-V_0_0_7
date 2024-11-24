@@ -7,7 +7,7 @@ import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.application.ea.activity.main.MainActivity
-import com.sample.application.ea.dataset.readonly.Itinerary
+import com.sample.application.ea.dataset.readonly.Attraction
 import com.sample.application.ea.ui.main.description.DescriptionFragment
 import com.sample.application.ea.ui.main.generic.MainBindingFragment
 import com.sample.application.ea.widget.ItineraryListAdapter
@@ -46,11 +46,11 @@ abstract class AttractionListViewFragment<TBinding> :
         binding: TBinding,
     ) = Unit
 
-    internal open fun filterByPopularity(item: Itinerary) = true
+    internal open fun filterByPopularity(item: Attraction) = true
 
     internal abstract fun matchFilter(
         pattern: Pattern,
-        set: Itinerary,
+        set: Attraction,
     ): List<Boolean>
 
     internal abstract fun onSearchTextChanged(s: CharSequence?)

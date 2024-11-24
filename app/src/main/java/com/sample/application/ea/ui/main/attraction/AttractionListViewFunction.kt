@@ -11,8 +11,8 @@ import android.widget.SearchView
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.application.ea.database.ItineraryList
-import com.sample.application.ea.dataset.readonly.ItineraryExtra
+import com.sample.application.ea.database.AttractionList
+import com.sample.application.ea.dataset.readonly.AttractionExtra
 import com.sample.application.ea.text.doOnTextChanged
 import com.sample.application.ea.ui.main.description.DescriptionFragment
 import com.sample.application.ea.widget.ItineraryListAdapter
@@ -53,8 +53,8 @@ fun <TBinding> AttractionListViewFragment<TBinding>.setupRecyclerView(
     searchViewWatcherCallback: (TextWatcher) -> Unit = {},
 ) where TBinding : ViewDataBinding {
     if (adapter == null) {
-        val newList = mutableListOf<ItineraryExtra>()
-        ItineraryList.forEach { item ->
+        val newList = mutableListOf<AttractionExtra>()
+        AttractionList.forEach { item ->
             when {
                 filterByPopularity(item) -> newList += item
             }

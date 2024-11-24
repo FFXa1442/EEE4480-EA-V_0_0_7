@@ -15,7 +15,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.sample.application.ea.R
 import com.sample.application.ea.activity.youtube.web.YoutubeActivity
 import com.sample.application.ea.databinding.FragmentDescriptionBinding
-import com.sample.application.ea.dataset.readonly.ItineraryExtra
+import com.sample.application.ea.dataset.readonly.AttractionExtra
 import com.sample.application.ea.ui.main.generic.MainBindingSheetDialogFragment
 import kotlin.math.min
 
@@ -68,9 +68,9 @@ class DescriptionFragment :
         val item = BundleCompat.getParcelable(
             requireArguments(),
             ARG_TAG,
-            ItineraryExtra::class.java
+            AttractionExtra::class.java
         )!!.apply {
-            itinerary.let { s ->
+            attraction.let { s ->
                 binding.title.text = s
                 binding.itinerary.text = s
             }
@@ -90,7 +90,7 @@ class DescriptionFragment :
                     Uri.parse(
                         "geo:0,0?" +
                                 "q=${item.latitude},${item.longitude}?" +
-                                "z=12 (${item.itinerary})"
+                                "z=12 (${item.attraction})"
                     )
                 )
             })

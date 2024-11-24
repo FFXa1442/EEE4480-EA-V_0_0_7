@@ -2,13 +2,13 @@ package com.sample.application.ea.dataset.readonly
 
 import android.os.Parcelable
 
-interface Itinerary : Parcelable {
+interface Attraction : Parcelable {
 
     val country: String
 
     val detail: String
 
-    val itinerary: String
+    val attraction: String
 
     val latitude: Double
 

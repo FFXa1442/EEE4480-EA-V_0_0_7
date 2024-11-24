@@ -5,7 +5,7 @@ import androidx.lifecycle.AtomicReference
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.application.ea.R
 import com.sample.application.ea.databinding.FragmentAttractionBinding
-import com.sample.application.ea.dataset.readonly.Itinerary
+import com.sample.application.ea.dataset.readonly.Attraction
 import com.sample.application.ea.extension.getValue
 import java.util.regex.Pattern
 
@@ -20,9 +20,9 @@ class AttractionFragment :
     override val recyclerView: RecyclerView
         get() = binding.cateListView
 
-    override fun matchFilter(pattern: Pattern, set: Itinerary): List<Boolean> {
+    override fun matchFilter(pattern: Pattern, set: Attraction): List<Boolean> {
         return mutableListOf(
-            pattern.matcher("${set.country}|${set.itinerary}").find()
+            pattern.matcher("${set.country}|${set.attraction}").find()
         )
     }
 
