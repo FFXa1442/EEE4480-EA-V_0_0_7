@@ -156,7 +156,7 @@ class AttractionList private constructor() {
             error: DatabaseError,
         ) {
             Log.e(
-                "InformationValueEventListener",
+                "AttractionList.OnValueEventListener",
                 error.message,
                 error.toException()
             )
